@@ -29,6 +29,30 @@
    
     <!-- body section -->
     <div class="body">
+        <!-- form modal  -->
+            <div class="modal" style="display: none;">
+                <div class="content">
+                    <div class="information">
+                        <input type="radio" name="lat" value="lat" readonly checked>
+                        <label for="lat">lat</label>
+                        <input type="radio" name="lng" value="lng" readonly checked>
+                        <label for="lng">lng</label>
+                    </div>
+                    <div class="place-name">
+                        <input type="text" class="inpuut" name="name_place" placeholder="Name of this place">
+                        <br>
+                        <select type="select" name="type_place" form="type-form">
+                            <option value="1">restorant</option>
+                            <option value="2">towert</option>
+                            <option value="3">office</option>
+                            <option value="4">home</option>
+                        </select>
+                        <br>
+                        <button id="send-information" class="btn" style="margin:10px 0px;">Place information</button>
+                    </div>
+                </div>
+            </div>
+        <!-- form modal  -->
         <div class="map-section" id="map-section" style="width: 100%; height: 600px;"></div>
     </div>
     <!-- body section -->
