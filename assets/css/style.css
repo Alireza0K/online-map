@@ -80,3 +80,8 @@ select{
     border: #538cf5 1px solid;
     margin: 10px 0px;
 }
+.x-icon{
+    display: flex;
+    justify-content: left;
+    cursor: pointer;
+}

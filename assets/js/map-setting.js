@@ -14,9 +14,14 @@
 
         // Get  location from user and add marker or pin
         map.on("dblclick" , function(event){
-            var lat = event.latlng.lat;
-            var lng = event.latlng.lng;
+            const lat = event.latlng.lat;
+            const lng = event.latlng.lng;
             L.marker([lat,lng]).addTo(map)
+            $("#modal-form").fadeIn(400);
+            $("#lat").val(lat);
+            $("#lng").val(lng);
+            $("#lng-lable").html(lng);
+            $("#lat-lable").html(lat);
         })
 
         // show user location
@@ -43,3 +48,27 @@
             map.locate({setView: true , maxZoom: default_zoom});
         }
         setTimeout(locate, 3000)
+$("#x-icon").click(function(e){
+    $("#modal-form").fadeOut();
+})
+
+$("#send-information").click(function(e){
+    var lat = $("#lat").val();
+    var lng = $("#lng").val();
+    var place = $("#place-name").val(); 
+    var place_type = $("#place-types").val();
+    $.ajax({
+        url : "process/ajaxhandler.php",
+        method : "post",
+        data : {
+            action : "add-location",
+            lat : lat,
+            lng : lng,
+            place_name : place,
+            place_types : place_type
+        },
+        success :function(response){                            
+            $("#message").html(response);
+        }
+    });
+})
