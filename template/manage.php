@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Management</title>
     <!-- All Style Bootstrap or anything -->
-    <link rel="icon" href="../assets/image/feather.svg">
+    <link rel="icon" href="<?= site_url("assets/image/feather.svg")?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
@@ -44,12 +44,12 @@
                         <button type="button" class="btn btn-primary">Active</button>
                         <button type="button" class="btn btn-secondary">Passive</button>
                     </div>
-                    <div class="btn btn-light" ><span><img src="../assets/image/home.svg" alt=""></span></div>
+                    <div class="btn btn-light" ><span><img src="<?php echo site_url('/assets/image/home.svg'); ?>" alt=""></span></div>
                 </div>
 
                 <!-- Right content in header -->
                 <div class="content-right  content-box">
-                    <button class="btn btn-warning">Sign out</button>
+                    <button class="btn btn-warning" id="sign-out">Sign out</button>
                 </div>
             </div>
             <!-- header -->
@@ -97,5 +97,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?php echo  site_url("assets/js/authentication.js")?>"></script>
 </body>
 </html>

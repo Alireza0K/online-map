@@ -19,4 +19,14 @@ switch ($action) {
             echo "Adding denied location";
         }
         break;
+    case 'login':
+        if(Login($_POST["username"] , $_POST["password"])){
+            echo "Login Success Fully :)";
+        }else{
+            echo "Username or Password is invalid";
+        }
+        break;
+    case "logout":
+        Logout();
+        break;
 }
