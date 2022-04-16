@@ -20,9 +20,6 @@
                 <input type="text" placeholder="Enter you're location...">
                 <button class="btn">searching</button>
             </div>
-            <div class="profile body-item">
-                username
-            </div>
         </div>
     </div>
     <!-- header section -->
