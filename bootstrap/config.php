@@ -9,3 +9,10 @@ $c_information = (object)[
     "username" => "root",
     "password" => ""
 ];
+
+# Admins list 
+$admins =
+[
+    "Alireza-admin" => "admin-123",
+    "admin" => "admin"
+];

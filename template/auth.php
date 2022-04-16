@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authentication</title>
     <!-- All Style Bootstrap or anything -->
-    <link rel="icon" href="./assets/image/user.svg">
+    <link rel="icon" href="<?= site_url("assets/image/user.svg")?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
@@ -41,7 +41,7 @@
                 <div class="mb-3">
                     <label for="Password" class="form-label">Password</label>
                     <div class="d-flex justify-content-center">
-                        <div class="col-6"><input type="text" class="form-control" id="Password" placeholder="#fas!f51#da$@!b"></div>   
+                        <div class="col-6"><input type="password" class="form-control" id="Password" placeholder="#fas!f51#da$@!b"></div>   
                     </div>
                 </div>
 
@@ -57,5 +57,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?php echo  site_url("assets/js/authentication.js")?>"></script>
 </body>
 </html>
