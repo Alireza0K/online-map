@@ -29,4 +29,10 @@ switch ($action) {
     case "logout":
         Logout();
         break;
+    case "active-location":
+        Activate_location($_POST["loc_id"]);
+        break;
+    case "deactive-location":
+        Deactive_location($_POST["loc_id"]);
+        break;
 }

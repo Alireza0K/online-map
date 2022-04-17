@@ -60,6 +60,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./assets/js/map-setting.js"></script>
+    <script>
+        <?php if($location):?>
+            L.marker([<?= $location->Lat ?> , <?= $location->Lng ?>]).addTo(map).bindPopup("<?= $location->Name ?>").openPopup();
+        <?php endif;?>
+    </script>
     <!-- java script section -->
 </body>
 </html>

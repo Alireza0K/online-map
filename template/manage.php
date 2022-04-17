@@ -31,6 +31,26 @@
         padding: 15px;
         border-radius: 0.5rem;
     }
+    .status-verified{
+        min-width: 70px;
+        background-color: #74df7c;
+        padding: 5px 5px;
+        text-align: center;
+        border-radius: 0.4rem;
+        color: #fff;
+    }
+    .status-unverified{
+        min-width: 70px;
+        background-color: #df7474;
+        padding: 5px 5px;
+        text-align: center;
+        border-radius: 0.4rem;
+        color: #fff;
+    }
+    iframe{
+        width: 100%;
+        height: 900px;
+    }
 </style>
 <body>
 
@@ -41,10 +61,10 @@
                 <!-- Left content in header -->
                 <div class="content-left content-box">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-primary">Active</button>
-                        <button type="button" class="btn btn-secondary">Passive</button>
+                        <a href="?status=1"><button type="button" class="btn btn-success">Active</button></a>
+                        <a href="?status=0"><button type="button" class="btn btn-primary">Passive</button></a>
                     </div>
-                    <div class="btn btn-light" ><span><img src="<?php echo site_url('/assets/image/home.svg'); ?>" alt=""></span></div>
+                    <a href="<?= site_url("index.php"); ?>"><div class="btn btn-light" ><span><img src="<?php echo site_url('/assets/image/home.svg'); ?>" alt=""></span></div></a>
                 </div>
 
                 <!-- Right content in header -->
@@ -66,23 +86,28 @@
                             <th scope="col">Created at</th>
                             <th scope="col">Lat</th>
                             <th scope="col">Lng</th>
+                            <th scope="col">Tool</th>
                             <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">Home</th>
-                            <td>4.17.2022</td>
-                            <td>25.312</td>
-                            <td>53.215</td>
-                            <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary">Active</button>
-                                <button type="button" class="btn btn-secondary">Passive</button>
-                            </div>
-                            <div class="btn btn-light">Locate</div>
-                            </td>
-                            </tr>
+                            <!-- Showing All location -->
+                            <?php foreach($get_locations as $location): ?>
+                                <tr>
+                                <th scope="row"><?= $location->Name ?></th>
+                                <td><?= $location->Created_at ?></td>
+                                <td><?= $location->Lat ?></td>
+                                <td><?= $location->Lng ?></td>
+                                <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary  Activate-location" data-location-id="<?= $location->ID ?>">Active</button>
+                                    <button type="button" class="btn btn-secondary  Deactivate-location" data-location-id="<?= $location->ID ?>">Passive</button>
+                                </div>
+                                <button  class="btn btn-light locatedmap" data-location="<?= $location->ID ?>"  data-bs-toggle="modal" data-bs-target="#exampleModal">Locate</button>
+                                </td>
+                                <td><div id="Status-eye" class="status  Status-eye  <?= $location->Status ? "status-verified" : "status-unverified" ?>"><?= $location->Status ? "verified" : "unverified" ?></div></td>
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
@@ -91,6 +116,26 @@
         </div>
     <!-- Bootstrap container -->
 
+    <!-- Modal -->
+    <div class="modallll" >
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Located location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Map -->
+                <iframe src="" frameborder="0" id="map-in-there"></iframe>
+            </div>
+            <div class="modal-footer">
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <!-- All java script file  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
@@ -98,5 +143,41 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="<?php echo  site_url("assets/js/authentication.js")?>"></script>
+    <script>
+        //  Located map
+        $(document).ready(function(){
+            $(".locatedmap").click(function(){
+                $("#map-in-there").attr("src" , '<?= BASE_URL ?>?location=' + $(this).attr("data-location"));
+            });
+            $(".Activate-location").click(function(e){
+                const location_id = $(this).attr("data-location-id");
+                $.ajax({
+                    url : "process/ajaxhandler.php",
+                    method : "post",
+                    data : {
+                        action : "active-location",
+                        loc_id : location_id
+                    },
+                    success :function(response){                            
+                        location.reload();
+                    }
+                });
+            });
+            $(".Deactivate-location").click(function(e){
+                const location_id = $(this).attr("data-location-id");
+                $.ajax({
+                    url : "process/ajaxhandler.php",
+                    method : "post",
+                    data : {
+                        action : "deactive-location",
+                        loc_id : location_id
+                    },
+                    success :function(response){                            
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
