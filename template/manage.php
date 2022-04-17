@@ -31,6 +31,22 @@
         padding: 15px;
         border-radius: 0.5rem;
     }
+    .status-verified{
+        min-width: 70px;
+        background-color: #74df7c;
+        padding: 5px 5px;
+        text-align: center;
+        border-radius: 0.4rem;
+        color: #fff;
+    }
+    .status-unverified{
+        min-width: 70px;
+        background-color: #df7474;
+        padding: 5px 5px;
+        text-align: center;
+        border-radius: 0.4rem;
+        color: #fff;
+    }
 </style>
 <body>
 
@@ -41,10 +57,10 @@
                 <!-- Left content in header -->
                 <div class="content-left content-box">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-primary">Active</button>
-                        <button type="button" class="btn btn-secondary">Passive</button>
+                        <a href="?status=1"><button type="button" class="btn btn-success">Active</button></a>
+                        <a href="?status=0"><button type="button" class="btn btn-primary">Passive</button></a>
                     </div>
-                    <div class="btn btn-light" ><span><img src="<?php echo site_url('/assets/image/home.svg'); ?>" alt=""></span></div>
+                    <a href="<?= site_url("index.php"); ?>"><div class="btn btn-light" ><span><img src="<?php echo site_url('/assets/image/home.svg'); ?>" alt=""></span></div></a>
                 </div>
 
                 <!-- Right content in header -->
@@ -66,23 +82,28 @@
                             <th scope="col">Created at</th>
                             <th scope="col">Lat</th>
                             <th scope="col">Lng</th>
+                            <th scope="col">Tool</th>
                             <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                            <th scope="row">Home</th>
-                            <td>4.17.2022</td>
-                            <td>25.312</td>
-                            <td>53.215</td>
-                            <td>
-                            <div class="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-primary">Active</button>
-                                <button type="button" class="btn btn-secondary">Passive</button>
-                            </div>
-                            <div class="btn btn-light">Locate</div>
-                            </td>
-                            </tr>
+                            <!-- Showing All location -->
+                            <?php foreach($get_locations as $location): ?>
+                                <tr>
+                                <th scope="row"><?= $location->Name ?></th>
+                                <td><?= $location->Created_at ?></td>
+                                <td><?= $location->Lat ?></td>
+                                <td><?= $location->Lng ?></td>
+                                <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary">Active</button>
+                                    <button type="button" class="btn btn-secondary">Passive</button>
+                                </div>
+                                <div class="btn btn-light">Locate</div>
+                                </td>
+                                <td><div class="status  <?= $location->Status ? "status-verified" : "status-unverified" ?>"><?= $location->Status ? "verified" : "unverified" ?></div></td>
+                                </tr>
+                            <?php endforeach;?>
                         </tbody>
                     </table>
                 </div>
