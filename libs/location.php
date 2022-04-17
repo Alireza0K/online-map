@@ -32,3 +32,41 @@ function Show_location($param = [])
     $result = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $result;
 }
+
+# Locate Location
+function Get_location($id)
+{
+    # connect to database
+    global $connection;
+
+    # Show All locations Query
+    $sql = "SELECT * FROM location WHERE ID = :id";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute(["id" => $id]);
+    $result = $stmt->fetch(PDO::FETCH_OBJ);
+    return $result;
+}
+
+# Activate location function 
+function Activate_location($id)
+{
+    # connect to database
+    global $connection;
+
+    # Query for toggle location Status
+    $sql = "UPDATE location SET Status = 1   WHERE ID = :id";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute(["id" => $id]);
+}
+
+# Deactive location function 
+function Deactive_location($id)
+{
+    # connect to database
+    global $connection;
+
+    # Query for toggle location Status
+    $sql = "UPDATE location SET Status = 0   WHERE ID = :id";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute(["id" => $id]);
+}
