@@ -25,6 +25,11 @@ function Show_location($param = [])
         $condition = "WHERE Status = {$param['status']}";
     }  
 
+    if (isset($param["keywords"])) {
+        $condition = "WHERE Status = 1 AND  Name LIKE '%{$param["keywords"]}%' ";
+    }  
+
+
     # Show All locations Query
     $sql = "SELECT * FROM location $condition";
     $stmt = $connection->prepare($sql);

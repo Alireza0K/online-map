@@ -85,3 +85,20 @@ select{
     justify-content: left;
     cursor: pointer;
 }
+.contentt-result{
+    display: inline-block;
+    padding: 10px 21px;
+    color: #fff;
+}
+.result{
+    background-color: #a6c3e0;
+    max-width: 30%;
+    border-radius: 0.5rem;
+    margin: 10px 0px
+}
+.right-content{
+    float: right;
+}
+.search-result{
+    margin: 15px 0px 0px 0px;
+}

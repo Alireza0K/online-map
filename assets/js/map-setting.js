@@ -72,3 +72,24 @@ $("#send-information").click(function(e){
         }
     });
 })
+
+// Search result 
+$("#search-box").keyup(function(){
+    const input = $(this);
+    const search_result = $(".search-result");
+    search_result.html("What are you looking for?");
+    $.ajax({
+        url : "process/ajaxhandler.php",
+        method : "post",
+        data : {
+            action : "live-search",
+            keyword : input.val()
+        },
+        success :function(response){                 
+            search_result.slideDown().html(response);
+        },
+        error :function(response){
+            console.log(response);
+        }
+    });
+});

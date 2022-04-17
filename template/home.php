@@ -17,8 +17,21 @@
     <div class="header">
         <div class="body">
             <div class="search-box body-item">
-                <input type="text" placeholder="Enter you're location...">
+                <input type="text" id="search-box" placeholder="Enter you're location...">
                 <button class="btn">searching</button>
+            </div>
+            <div class="search-result" style="display: none; color: #fff;">
+                <div class="content-result">
+                    <div class="result">
+                        <div class="left-content  contentt-result">
+                            <h4>Name</h4>
+                            <h4>Type</h4>
+                        </div>
+                        <div class="right-content  contentt-result">
+                            <button class="btn">locate</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

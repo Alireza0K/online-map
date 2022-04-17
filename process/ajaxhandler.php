@@ -35,4 +35,14 @@ switch ($action) {
     case "deactive-location":
         Deactive_location($_POST["loc_id"]);
         break;
+    case "live-search":
+        $keyword = $_POST["keyword"];
+        if (!isset($keyword) or empty($keyword)) {
+            dienotice("pls seaech some place");
+        }
+        $all_results = Show_location(["keywords" => $keyword]);
+        foreach($all_results as $result){
+            echo "<a href='?location=$result->ID'><div class='result'> <div class='left-content  contentt-result'> <h4>$result->Name</h4> <h4>".location_types[$result->Type]."</h4> </div> <div class='right-content  contentt-result'> <button class='btn' value='[$result->Lat , $result->Lng]'>locate</button> </div> </div></a>";
+        }
+        break;
 }
